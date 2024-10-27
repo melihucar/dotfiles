@@ -195,6 +195,12 @@ return {
                     root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', '.git'),
                 },
 
+                csharp_ls = {
+                    cmd = { 'csharp-language-server', '--stdio' },
+                    filetypes = { 'csharp' },
+                    root_dir = require('lspconfig.util').root_pattern('.git'),
+                },
+
                 -- pyright = {},
                 -- rust_analyzer = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -235,8 +241,8 @@ return {
             local ensure_installed = vim.tbl_keys(servers or {})
             vim.list_extend(ensure_installed, {
                 "phpcs",
-                "php-cs-fixer",
 
+                "php-cs-fixer",
                 'graphql-language-service-cli',
                 'prettier',
                 'stylua', -- Used to format Lua code
@@ -246,8 +252,10 @@ return {
                 'pint', -- Laravel linting tool
                 'docker-compose-language-service', -- Used to provide Docker Compose language support
                 'dockerfile-language-server', -- Used to provide Dockerfile language support
+                'csharp-language-server', -- Used to provide C# language support
 
                 'php-debug-adapter', -- Used to provide PHP debugging support
+                'netcoredbg', -- Used to provide .NET debugging support
             })
             require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 

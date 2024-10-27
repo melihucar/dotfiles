@@ -53,11 +53,13 @@ return {
       local dap = require 'dap'
       local dapui = require 'dapui'
 
-      local path = require("mason-registry").get_package("php-debug-adapter"):get_install_path()
+      local phpDebugPath = require("mason-registry").get_package("php-debug-adapter"):get_install_path()
+      local netcoreDebugPath = require("mason-registry").get_package("netcoredbg"):get_install_path()
+
       dap.adapters.php = {
         type = "executable",
         command = "node",
-        args = { path .. "/extension/out/phpDebug.js" },
+        args = { phpDebugPath .. "/extension/out/phpDebug.js" },
       }
 
       dap.configurations.php = {
@@ -98,6 +100,55 @@ return {
           ignore = {"**/vendor/**/*.php"},
         }
       }
+
+      dap.adapters.coreclr = {
+        type = "executable",
+        command = netcoreDebugPath .. "/netcoredbg",
+        args = { "--interpreter=vscode" },
+      }
+
+      dap.configurations.cs = {
+        {
+          type = "coreclr",
+          name = "Dotnet Launch (console)",
+          request = "launch",
+
+          program = function ()
+            -- Get current project name from working directory
+            local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+            local path = vim.fn.getcwd() .. "/bin/Debug/net8.0/" .. project .. ".dll"
+
+            -- Check if the DLL exists
+            if vim.fn.filereadable(path) == 1 then
+              vim.notify("Using Path: " .. path)
+              return path
+            end
+
+            -- Notify current directory if DLL not found
+            vim.notify("Current directory: " .. vim.fn.getcwd())
+
+            -- Search for a .csproj file in the working directory
+            local files = vim.fn.glob(vim.fn.getcwd() .. "/*.csproj", false, true)
+            if #files == 0 then
+              vim.notify("No .csproj file found in directory.")
+              return nil
+            end
+
+            -- Use the first .csproj file found and extract its name
+            local file = files[1]
+            project = vim.fn.fnamemodify(file, ":t:r")
+            path = vim.fn.getcwd() .. "/bin/Debug/net8.0/" .. project .. ".dll"
+
+            vim.notify("Generated Path: " .. path)
+            return path
+          end,
+          args = {},
+          cwd = "${workspaceFolder}",
+          stopAtEntry = false,
+          console = "internalConsole",
+        },
+      }
+
 
       require("mason-nvim-dap").setup({
         -- Makes a best effort to setup the various debuggers with
