@@ -21,6 +21,13 @@ vim.opt.autoindent = true
 vim.opt.number = true
 vim.opt.relativenumber = true
 
+-- Enable syntax highlighting
+vim.opt.syntax = 'on'
+
+-- scroll offset
+--  See `:help 'scrolloff'`
+vim.opt.scrolloff = 8
+
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = 'a'
 

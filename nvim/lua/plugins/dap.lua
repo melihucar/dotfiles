@@ -112,7 +112,7 @@ return {
           type = "coreclr",
           name = "Dotnet Launch (console)",
           request = "launch",
-
+          preLaunchTask = "build",
           program = function ()
             -- Get current project name from working directory
             local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
@@ -182,7 +182,18 @@ return {
       dap.listeners.before.event_terminated['dapui_config'] = dapui.close
       dap.listeners.before.event_exited['dapui_config'] = dapui.close
 
-      vim.api.nvim_set_hl(0, "DapStoppedLine", { default = true, link = "Visual" })
+      vim.api.nvim_set_hl(0, "DapStoppedLine", { bg='#524f67' }) -- Line highlight
+      vim.api.nvim_set_hl(0, "DapStoppedSymbol", { fg='#eb6f92' })  -- Symbol highlight
+
+      vim.fn.sign_define('DapBreakpoint', { text = '◆', texthl = 'DapBreakpoint', fg = '#9ccfd8' })
+
+      -- Define DapStopped sign with the custom symbol and highlights
+      vim.fn.sign_define('DapStopped', {
+        text = '▸',  -- Use a different icon if needed
+        texthl = 'DapStoppedSymbol',
+        linehl = 'DapStoppedLine',
+        numhl = 'DapStoppedLine',
+      })
 
       -- setup dap config by VsCode launch.json file
       local vscode = require("dap.ext.vscode")
