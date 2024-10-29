@@ -5,12 +5,14 @@
 tap "shivammathur/php"
 
 brew "zsh"
+brew "zsh"
 brew "wget"
 brew "tmux"
 brew "neovim"
 brew "htop"
 brew "httpie"
 brew "jq"
+brew "bat"
 
 brew "ripgrep"
 brew "fd"
