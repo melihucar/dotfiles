@@ -110,3 +110,8 @@ fi
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+# setup fzf key bindings and fuzzy completion
+source <(fzf --zsh)
+
+alias fim='nvim $(fzf -m --preview "bat --color=always --style=header,grid --line-range :500 {}")'
