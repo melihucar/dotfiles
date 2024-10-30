@@ -111,7 +111,38 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+
+# ----------------------------------------
+# fzf
+# ----------------------------------------
+
 # setup fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
 alias fim='nvim $(fzf -m --preview "bat --color=always --style=header,grid --line-range :500 {}")'
+
+# ----------------------------------------
+# tmux
+# ----------------------------------------
+
+# tmux attach to an existing session or create a new one
+_ta() {
+  if [ -z "$1" ]; then
+    tmux attach || tmux
+  else
+    tmux attach -t "$1" || tmux new -s "$1"
+  fi
+}
+
+# Autocompletion for the _ta function
+_ta_autocomplete() {
+  # Get the list of existing tmux sessions
+  local sessions
+  sessions=("${(f)$(tmux list-sessions -F '#S' 2>/dev/null)}")
+
+  # Use _describe to provide sessions as autocompletion options
+  _describe 'session' sessions
+}
+
+# Register _ta_autocomplete as the autocompletion function for ta
+compdef _ta_autocomplete ta
