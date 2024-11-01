@@ -11,6 +11,9 @@ vim.g.loaded_netrw = 1
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- Disable gitblame at startup
+vim.g.gitblame_enabled = 0
+
 -- Set tab and indent settings
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
