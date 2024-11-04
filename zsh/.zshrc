@@ -111,6 +111,20 @@ fi
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+# Homebrew
+alias brewup='brew update && brew upgrade && brew cleanup'
+
+# ----------------------------------------
+# PHP
+# ----------------------------------------
+alias php@8.0='/usr/local/opt/php@8.0/bin/php'
+alias php@8.1='/usr/local/opt/php@8.1/bin/php'
+alias php@8.3='/usr/local/opt/php@8.3/bin/php'
+
+# if go/bin exists in HOME, add it to PATH
+if [ -d "$HOME/go/bin" ] ; then
+  export PATH="$HOME/go/bin:$PATH"
+fi
 
 # ----------------------------------------
 # fzf
@@ -119,14 +133,14 @@ fi
 # setup fzf key bindings and fuzzy completion
 source <(fzf --zsh)
 
-alias fim='nvim $(fzf -m --preview "bat --color=always --style=header,grid --line-range :500 {}")'
+alias vim='nvim $(fzf -m --preview "bat --color=always --style=header,grid --line-range :500 {}")'
 
 # ----------------------------------------
 # tmux
 # ----------------------------------------
 
 # tmux attach to an existing session or create a new one
-_ta() {
+ta() {
   if [ -z "$1" ]; then
     tmux attach || tmux
   else
