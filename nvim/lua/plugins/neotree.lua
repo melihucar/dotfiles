@@ -25,22 +25,19 @@ return {
             default_component_configs = {
                 indent = {
                     with_expanders = true,
-                    expander_collapsed ='',
-                    -- right icon
-                    expander_expanded =  '',
                     expander_highlight = 'NeoTreeExpander',
                 },
                 git_status = {
                     symbols = {
-                        added     = "",
-                        modified  = "",
-                        deleted   = "",
-                        renamed   = "",
-                        untracked = "",
-                        -- ignored   = "",
-                        -- unstaged  = "",
-                        staged    = "",
-                        conflict  = "",
+                        added     = '+', -- or '✚'
+                        modified  = '*', -- or ''
+                        deleted   = '✖', -- this can only be used in the git_status source
+                        renamed   = '➜', -- this can only be used in the git_status source
+                        untracked = '★', -- this can only be used in the git_status source
+                        ignored   = '◌',
+                        unstaged  = '✗',
+                        staged    = '✓',
+                        conflict  = '!',
                     },
                 }
             }

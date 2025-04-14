@@ -2,12 +2,6 @@
 --  See `:help hlsearch`
 vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 
--- TIP: Disable arrow keys in normal mode
-vim.keymap.set('n', '<left>', '')
-vim.keymap.set('n', '<right>', '')
-vim.keymap.set('n', '<up>', '')
-vim.keymap.set('n', '<down>', '')
-
 -- Keybinds to make split navigation easier.
 --  Use CTRL+<hjkl> to switch between windows
 --

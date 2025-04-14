@@ -1,8 +1,9 @@
 return {
     {
         -- Install copilot.vim
-        'github/copilot.vim',
+        "github/copilot.vim",
     },
+
     {
         'windwp/nvim-autopairs',
         event = 'InsertEnter',
@@ -16,6 +17,13 @@ return {
             cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done())
         end,
     },
+
+    {
+        "echasnovski/mini.move",
+        event = "VeryLazy",
+        opts = {},
+    },
+
     { -- Autocompletion
         'hrsh7th/nvim-cmp',
         event = 'InsertEnter',
@@ -36,12 +44,12 @@ return {
                     -- `friendly-snippets` contains a variety of premade snippets.
                     --    See the README about individual language/framework/plugin snippets:
                     --    https://github.com/rafamadriz/friendly-snippets
-                    -- {
-                    --   'rafamadriz/friendly-snippets',
-                    --   config = function()
-                    --     require('luasnip.loaders.from_vscode').lazy_load()
-                    --   end,
-                    -- },
+                    {
+                        'rafamadriz/friendly-snippets',
+                        config = function()
+                            require('luasnip.loaders.from_vscode').lazy_load()
+                        end,
+                    },
                 },
             },
             'saadparwaiz1/cmp_luasnip',
@@ -53,6 +61,7 @@ return {
             'hrsh7th/cmp-path',
             'hrsh7th/cmp-buffer',
         },
+
         config = function()
             -- See `:help cmp`
             local cmp = require 'cmp'
@@ -132,6 +141,7 @@ return {
             }
         end,
     },
+
     {
         "folke/ts-comments.nvim",
         event = "VeryLazy",
