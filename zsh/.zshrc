@@ -70,7 +70,10 @@ ZSH_THEME="lambda"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(
+  git
+  poetry
+  )
 
 source $ZSH/oh-my-zsh.sh
 
@@ -82,6 +85,7 @@ source $ZSH/oh-my-zsh.sh
 export LANG=en_US.UTF-8
 
 alias vi='vim'
+alias python='python3'
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
@@ -117,9 +121,18 @@ alias brewup='brew update && brew upgrade && brew cleanup'
 # ----------------------------------------
 # PHP
 # ----------------------------------------
+alias php@7.3='/usr/local/opt/php@7.3/bin/php'
 alias php@8.0='/usr/local/opt/php@8.0/bin/php'
 alias php@8.1='/usr/local/opt/php@8.1/bin/php'
 alias php@8.3='/usr/local/opt/php@8.3/bin/php'
+
+alias composer@8.0='php@8.0 /usr/local/bin/composer'
+alias composer@8.1='php@8.1 /usr/local/bin/composer'
+alias composer@8.3='php@8.3 /usr/local/bin/composer'
+
+export PATH="$HOME/.composer/vendor/bin/:$PATH"
+
+# source <(valet completion)
 
 # if go/bin exists in HOME, add it to PATH
 if [ -d "$HOME/go/bin" ] ; then
@@ -160,3 +173,13 @@ _ta_autocomplete() {
 
 # Register _ta_autocomplete as the autocompletion function for ta
 compdef _ta_autocomplete ta
+
+export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
+
+export ORACLE_HOME="$HOME/.oracle/"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '$HOME/google-cloud-sdk/path.zsh.inc' ]; then . '$HOME/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '$HOME/google-cloud-sdk/completion.zsh.inc' ]; then . '$HOME/google-cloud-sdk/completion.zsh.inc'; fi
