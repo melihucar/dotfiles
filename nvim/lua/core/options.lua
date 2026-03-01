@@ -80,11 +80,3 @@ vim.opt.cursorline = true
 
 -- Preview substitutions live, as you type!
 vim.opt.inccommand = 'split'
-
--- vim.api.nvim_create_autocmd("VimEnter", {
---  callback = function()
---     if not vim.fn.argv()[1] then
---       require("persistence").load()
---     end
---   end,
--- })
