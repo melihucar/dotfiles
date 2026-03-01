@@ -200,6 +200,19 @@ Auto-format on save via LSP. Formatters: black + isort (Python), clang-format (C
 | `,ql` | Restore last session |
 | `,as` | Toggle autosave |
 
+## Claude Code
+
+### claudecode.nvim (`coder/claudecode.nvim`)
+
+IDE integration for Claude Code CLI. Starts a WebSocket server on launch so `claude --ide` can connect and send inline diffs.
+
+| Key | Description |
+|-----|-------------|
+| `,aa` | Accept Claude suggestion |
+| `,ad` | Reject Claude suggestion |
+
+Usage: Run `claude --ide` in a separate terminal. When Claude proposes file edits, a vertical split diff opens in Neovim.
+
 ## UI
 
 ### which-key (`folke/which-key.nvim`)
