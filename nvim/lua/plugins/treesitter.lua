@@ -20,11 +20,13 @@ return {
                 context_commentstring = { enable = true, enable_autocmd = false },
             },
             ensure_installed = {
-                "c", "lua", "vim", "vimdoc", "query",
+                "c", "cpp", "objc",
+                "lua", "vim", "vimdoc", "query",
                 "python", "ninja", "rst",
-                "go",
-                "javascript",
-                "html", "css", "typescript", "tsx", "json", "yaml", "markdown", "markdown_inline"
+                "go", "gomod", "gosum",
+                "javascript", "typescript", "tsx",
+                "html", "css", "json", "yaml", "markdown", "markdown_inline",
+                "php",
             },
             sync_install = false,
             highlight = { enable = true },

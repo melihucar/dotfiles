@@ -72,7 +72,7 @@ return {
 
             local servers = {
                 pyright = {
-                    setttings = {
+                    settings = {
                         python = {
                             analysis = {
                                 typeCheckingMode = 'off',
@@ -95,6 +95,50 @@ return {
                     root_dir = require('lspconfig.util').root_pattern('package.json', 'tsconfig.json', '.git'),
                 },
 
+                clangd = {
+                    cmd = { 'clangd', '--background-index', '--clang-tidy', '--header-insertion=iwyu' },
+                    filetypes = { 'c', 'cpp', 'objc', 'objcpp' },
+                    root_dir = require('lspconfig.util').root_pattern(
+                        'compile_commands.json', 'compile_flags.txt', '.clangd', '.git'
+                    ),
+                    capabilities = {
+                        offsetEncoding = { 'utf-16' },
+                    },
+                },
+
+                intelephense = {
+                    cmd = { 'intelephense', '--stdio' },
+                    filetypes = { 'php' },
+                    root_dir = require('lspconfig.util').root_pattern('composer.json', '.git'),
+                    settings = {
+                        intelephense = {
+                            stubs = {
+                                "apache", "bcmath", "bz2", "calendar", "com_dotnet", "Core",
+                                "ctype", "curl", "date", "dba", "dom", "enchant", "exif",
+                                "FFI", "fileinfo", "filter", "fpm", "ftp", "gd", "gettext",
+                                "gmp", "hash", "iconv", "imap", "intl", "json", "ldap",
+                                "libxml", "mbstring", "meta", "mysqli", "oci8", "odbc",
+                                "openssl", "pcntl", "pcre", "PDO", "pdo_ibm", "pdo_mysql",
+                                "pdo_pgsql", "pdo_sqlite", "pgsql", "Phar", "posix",
+                                "pspell", "readline", "Reflection", "session", "shmop",
+                                "SimpleXML", "snmp", "soap", "sockets", "sodium", "SPL",
+                                "sqlite3", "standard", "superglobals", "sysvmsg", "sysvsem",
+                                "sysvshm", "tidy", "tokenizer", "xml", "xmlreader",
+                                "xmlrpc", "xmlwriter", "xsl", "Zend OPcache", "zip", "zlib",
+                            },
+                            completion = {
+                                fullyQualifyGlobalConstantsAndFunctions = false,
+                                triggerParameterHints = true,
+                                insertUseDeclaration = true,
+                                maxItems = 100,
+                            },
+                            environment = {
+                                phpVersion = "8.2.0",
+                            },
+                        },
+                    },
+                },
+
                 lua_ls = {
                     settings = {
                         Lua = {
@@ -106,20 +150,18 @@ return {
 
             require('mason').setup()
 
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {
-                -- 'prettier', -- For JS/TS formatting
-                -- 'stylua', -- Lua formatting
-                -- 'black', -- Python formatting
-                -- 'flake8', -- Python linting
-                'gopls', -- Go LSP
-                'ts_ls', -- React/TS LSP
-            })
+            local lsp_servers = vim.tbl_keys(servers or {})
 
-            require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+            require('mason-tool-installer').setup {
+                ensure_installed = {
+                    'goimports',
+                    'gofumpt',
+                    'prettier',
+                },
+            }
 
             require('mason-lspconfig').setup {
-                ensure_installed = ensure_installed,
+                ensure_installed = lsp_servers,
                 automatic_installation = true,
                 handlers = {
                     function(server_name)

@@ -72,22 +72,69 @@ return {
             end
             require("dap-python").test_runner = "pytest"
 
-            require("mason-nvim-dap").setup({
-                -- Makes a best effort to setup the various debuggers with
-                -- reasonable debug configurations
-                automatic_installation = true,
-
-                -- You can provide additional configuration to the handlers,
-                -- see mason-nvim-dap README for more information
-                handlers = {},
-
-                -- You'll need to check that you have the required things installed
-                -- online, please don't ask me how to install them :)
-                ensure_installed = {
-                    'debugpy', -- Python debugging
-                    'delve', -- Go debugger
-                    'node',
+            -- C/C++/Objective-C debugging via codelldb
+            dap.adapters.codelldb = {
+                type = 'server',
+                port = '${port}',
+                executable = {
+                    command = os.getenv("HOME") .. '/.local/share/nvim/mason/packages/codelldb/extension/adapter/codelldb',
+                    args = { '--port', '${port}' },
                 },
+            }
+
+            local c_cpp_config = {
+                {
+                    name = 'Launch file',
+                    type = 'codelldb',
+                    request = 'launch',
+                    program = function()
+                        return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+                    end,
+                    cwd = '${workspaceFolder}',
+                    stopOnEntry = false,
+                },
+                {
+                    name = 'Attach to process',
+                    type = 'codelldb',
+                    request = 'attach',
+                    pid = require('dap.utils').pick_process,
+                    cwd = '${workspaceFolder}',
+                },
+            }
+
+            dap.configurations.c = c_cpp_config
+            dap.configurations.cpp = c_cpp_config
+            dap.configurations.objc = c_cpp_config
+
+            -- PHP debugging via php-debug-adapter
+            dap.adapters.php = {
+                type = 'executable',
+                command = 'node',
+                args = { os.getenv("HOME") .. '/.local/share/nvim/mason/packages/php-debug-adapter/extension/out/phpDebug.js' },
+            }
+
+            dap.configurations.php = {
+                {
+                    name = 'Listen for Xdebug',
+                    type = 'php',
+                    request = 'launch',
+                    port = 9003,
+                },
+                {
+                    name = 'Launch current script',
+                    type = 'php',
+                    request = 'launch',
+                    program = '${file}',
+                    cwd = '${workspaceFolder}',
+                    port = 9003,
+                    runtimeArgs = { '-dxdebug.start_with_request=yes' },
+                    env = { XDEBUG_MODE = 'debug', XDEBUG_CONFIG = 'client_port=9003' },
+                },
+            }
+
+            require("mason-nvim-dap").setup({
+                automatic_installation = true,
+                handlers = {},
             })
 
 
