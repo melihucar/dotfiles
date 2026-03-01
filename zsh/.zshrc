@@ -76,6 +76,14 @@ source <(fzf --zsh)
 # Open files with fzf + bat preview
 alias vf='nvim $(fzf -m --preview "bat --color=always --style=header,grid --line-range :500 {}")'
 
+# Interactive git diff with fzf + bat preview
+gdf() {
+  git diff --name-only "$@" | fzf --ansi \
+    --preview "git diff --color=always $@ -- {}" \
+    --bind "ctrl-j:preview-down,ctrl-k:preview-up" \
+    --bind "ctrl-f:preview-page-down,ctrl-b:preview-page-up"
+}
+
 # ----------------------------------------
 # tmux
 # ----------------------------------------
