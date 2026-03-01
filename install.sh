@@ -29,6 +29,7 @@ info "Creating symlinks..."
 
 ln -sf "$DOTFILES/zsh/.zshrc" "$HOME/.zshrc"
 ln -sf "$DOTFILES/tmux/.tmux.conf" "$HOME/.tmux.conf"
+ln -sf "$DOTFILES/git/.gitconfig" "$HOME/.gitconfig"
 
 mkdir -p "$HOME/.config"
 ln -sfn "$DOTFILES/nvim" "$HOME/.config/nvim"
