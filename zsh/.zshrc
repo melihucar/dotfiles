@@ -1,4 +1,9 @@
 # ----------------------------------------
+# Homebrew (must be before Oh My Zsh for plugins that need brew binaries)
+# ----------------------------------------
+export PATH="/opt/homebrew/bin:$PATH"
+
+# ----------------------------------------
 # Oh My Zsh
 # ----------------------------------------
 export ZSH="$HOME/.oh-my-zsh"
@@ -8,6 +13,7 @@ plugins=(
   git
   poetry
   z
+  direnv
   zsh-autosuggestions
   zsh-syntax-highlighting
 )
@@ -30,6 +36,11 @@ fi
 alias vi='vim'
 alias python='python3'
 
+# eza (modern ls)
+alias ls='eza --icons'
+alias ll='eza -la --icons --git'
+alias lt='eza -la --icons --git --tree --level=2'
+
 # ----------------------------------------
 # PATH
 # ----------------------------------------
@@ -38,7 +49,6 @@ export PATH="$HOME/.local/share/nvim/mason/bin:$PATH"
 export PATH="$HOME/.composer/vendor/bin:$PATH"
 export PATH="$HOME/.dotnet/tools:$PATH"
 export PATH="$HOME/.config/phpmon/bin:$PATH"
-export PATH="/opt/homebrew/bin:$PATH"
 export PATH="/Applications/Postgres.app/Contents/Versions/16/bin:$PATH"
 
 if [ -d "$HOME/go/bin" ]; then

@@ -17,6 +17,10 @@ brew "lazygit"
 
 brew "ripgrep"
 brew "fd"
+brew "eza"
+brew "direnv"
+brew "tldr"
+brew "lazydocker"
 
 brew "nvm"
 brew "go"

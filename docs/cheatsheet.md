@@ -80,6 +80,9 @@ Defined in `.zshrc`:
 |---|---|
 | `vim` | Opens nvim |
 | `vf` | Opens nvim with fzf file picker + bat preview |
+| `ls` | `eza --icons` (colored file list with icons) |
+| `ll` | `eza -la --icons --git` (detailed list with git status) |
+| `lt` | `eza -la --icons --git --tree --level=2` (tree view) |
 | `brewup` | `brew update && brew upgrade && brew cleanup` |
 | `ta` | Attach to tmux session or create one |
 | `ta <name>` | Attach to named session or create it |
@@ -159,6 +162,50 @@ tmux ls             # list all sessions
 | `C-a Ctrl+r` | Restore session layout |
 
 Sessions are also auto-saved every 15 minutes by tmux-continuum.
+
+## direnv (Auto-load Environment per Project)
+
+Create a `.envrc` file in any project directory to auto-load env vars when you `cd` into it:
+
+```bash
+cd ~/projects/my-app
+echo 'export DATABASE_URL="postgres://localhost/mydb"' > .envrc
+direnv allow    # approve the .envrc (required once per change)
+```
+
+Now every time you enter that directory, `DATABASE_URL` is set. Leave the directory and it's unset.
+
+Common `.envrc` patterns:
+
+```bash
+# Load a .env file
+dotenv
+
+# Activate a Python venv
+layout python3
+
+# Add a local bin to PATH
+PATH_add bin
+
+# Set project-specific vars
+export API_KEY="dev-key-123"
+```
+
+## tldr (Simplified Man Pages)
+
+```bash
+tldr tar         # show common tar examples
+tldr git stash   # show common git stash examples
+tldr ffmpeg      # no more googling ffmpeg flags
+```
+
+## lazydocker
+
+```bash
+lazydocker       # TUI for managing Docker containers, images, volumes, logs
+```
+
+Same idea as `lazygit` but for Docker. Navigate with `h/j/k/l`, view logs, restart containers, all from the terminal.
 
 ## Productivity Tips
 
