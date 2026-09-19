@@ -8,6 +8,16 @@ Rosé pine everywhere. Symlinked with GNU stow, bootstrapped by one idempotent s
 
 ---
 
+## Before wiping the disk
+
+- [ ] `~/.dotfiles` committed **and pushed** (`git status` clean, `git log origin/main..` empty)
+- [ ] Every repo in `~/Repositories` pushed — find stragglers:
+      `for d in ~/Repositories/*/; do git -C "$d" status -s -b 2>/dev/null | grep -qE '^\?\?|^ M|ahead' && echo "$d"; done`
+- [ ] Copied to a USB disk / cloud: `~/.ssh` (or just re-create keys), `~/.zshrc.local`, `~/.config/git/local`,
+      `~/Documents`, `~/Pictures`, `~/Downloads` (anything you want), browser data is synced by Chrome sign-in
+- [ ] Docker volumes you care about (`docker volume ls`) dumped, e.g. `pg_dump`
+- [ ] Ubuntu **26.04 LTS** ISO on a USB stick (ubuntu.com/download/desktop → balenaEtcher / `dd`)
+
 ## Reinstall checklist
 
 Do these in order on a fresh Ubuntu 26.04 install (GNOME is fine to start from).
@@ -31,7 +41,7 @@ cd ~/.dotfiles
   the defaults are `Melih Uçar` and the GitHub noreply address.
 - Takes ~10 min (Neovim compiles parsers and installs language servers).
 - Safe to re-run; it only does what's missing. Single steps: `./install.sh link`, `./install.sh nvim`, …
-  (steps: `apt desktop fonts link git mise shell tmux nvim`).
+  (steps: `apt desktop apps fonts link git mise shell tmux nvim`).
 
 ### 3. SSH key for GitHub (pushes go over SSH, pulls over HTTPS)
 
@@ -67,11 +77,25 @@ Optional cleanup of old tools: `scripts/cleanup-legacy.sh` (asks per item).
 
 ---
 
+## What gets installed
+
+| Where from | What |
+|---|---|
+| apt (`packages/apt-base.txt`) | build-essential, git, curl, stow, zsh, tmux, jq, htop, btop, wl-clipboard… |
+| Docker's apt repo | docker-ce + compose/buildx plugins (falls back to Ubuntu's `docker.io`) |
+| apt (`packages/apt-desktop.txt`) | Hyprland, hyprlock/idle, waybar, fuzzel, mako, greetd+tuigreet, pipewire, nautilus, ghostty |
+| vendor `.deb` (each adds its own apt repo → updates via `apt upgrade`) | Google Chrome · VS Code · Claude desktop · ChatGPT desktop (with Codex) |
+| mise | node, pnpm, python, uv, neovim, tree-sitter, gh, lazygit, delta, starship, fzf, zoxide, eza, bat, ripgrep, fd, yazi, lazydocker, tldr, xh, **Claude Code** (`claude`), **Codex CLI** (`codex`) |
+| Neovim (mason) | basedpyright, ruff, vtsls, eslint, tailwind, css/html/json/yaml/lua/bash/docker LSPs, prettierd, stylua, shfmt, debugpy |
+
+Claude desktop's Cowork tab needs virtualization: install.sh adds you to the `kvm` group (log out/in once).
+No official GitHub Desktop for Linux — use `lazygit` (`lg`) and `gh`.
+
 ## What's where
 
 ```
-install.sh                 bootstrap: apt → desktop → fonts → stow link → git id → mise → zsh → tmux → nvim
-packages/apt-base.txt      CLI + build deps (docker handled in install.sh)
+install.sh                 bootstrap: apt → desktop → apps → fonts → stow link → git id → mise → zsh → tmux → nvim
+packages/apt-base.txt      CLI + build deps (docker + desktop apps are handled in install.sh)
 packages/apt-desktop.txt   Hyprland stack, greetd/tuigreet, ghostty
 scripts/remove-gnome.sh    GNOME/GDM → greetd + tuigreet (dry-run by default)
 scripts/cleanup-legacy.sh  interactive removal of nvm, oh-my-zsh, .NET, sway leftovers…

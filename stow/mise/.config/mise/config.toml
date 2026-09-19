@@ -25,6 +25,17 @@ ripgrep = "latest"
 fd = "latest"
 yazi = "latest"
 usage = "latest" # shell completions for mise itself
+lazydocker = "latest"
+tealdeer = "latest" # `tldr <cmd>` cheat sheets
+xh = "latest"       # httpie-style HTTP client
+
+# AI coding CLIs (update with `mise up`)
+claude = "latest"   # Claude Code
+codex = "latest"    # OpenAI Codex
+
+[env]
+# Claude Code is installed/updated by mise (`mise up`), not by its own updater
+DISABLE_AUTOUPDATER = "1"
 
 [settings]
 # read .nvmrc / .node-version / .python-version in existing projects
