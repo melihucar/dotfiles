@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
-# volume.sh up|down|mute — change volume and show it (like the old sway pamixer + notify-send binds)
+# volume.sh up|down|mute [step%] — change volume and show a notification with a progress bar
 set -u
 sink=@DEFAULT_AUDIO_SINK@
+step=${2:-5}
 case ${1:-} in
-  up)   wpctl set-volume -l 1 "$sink" 5%+ ;;
-  down) wpctl set-volume "$sink" 5%- ;;
+  up)   wpctl set-volume -l 1 "$sink" "${step}%+" ;;
+  down) wpctl set-volume "$sink" "${step}%-" ;;
   mute) wpctl set-mute "$sink" toggle ;;
 esac
 out=$(wpctl get-volume "$sink")                 # e.g. "Volume: 0.45 [MUTED]"

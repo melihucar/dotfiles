@@ -124,13 +124,13 @@ stow/<pkg>/                mirrors $HOME; `dot-foo` is linked as `~/.foo`
 
 ## Keys
 
-**Hyprland** (Super =  , same keys as the old sway config):
-`Return` terminal · `D` / `Space` launcher · `Q` close · `H/J/K/L` or arrows focus · `Shift+HJKL` move ·
-`Ctrl+HJKL` resize (`R` = resize mode) · `1-0` workspaces (1 = right screen, 0 = left) · `F` fullscreen ·
-`Shift+F` maximize · `Shift+Space` float · `B`/`V` next window right/below · `S`/`W` tabs (group), `Alt+Tab` next tab ·
-`E` toggle split · `-` scratchpad (`Shift+-` send there) · `Shift+C` reload · `Shift+E` log out (asks) ·
-`Shift+Esc` or `Shift+Calculator` power menu · `Esc` lock · `Shift+B` browser · `N` files · `C` clipboard history ·
-`Shift+S` region screenshot · keyboard: Turkish Q.
+**Hyprland** — Omarchy's key scheme (Super =  ). **`Super+K` shows every binding, searchable.**
+Most used: `Return` terminal · `Space` launcher · `W`/`Q` close · `Escape` system menu (lock, sleep, reboot, shutdown, log out) ·
+arrows focus, `Shift+arrows` swap · `1-0` workspaces (1-5 right screen, 6-10 left), `Shift+num` move window ·
+`F` fullscreen, `Alt+F` maximize · `T` float · `J` split direction · `G` group (tabs) · `S` scratchpad ·
+`C`/`V`/`X` copy/paste/cut in any app · `Ctrl+V` clipboard history · `Print` screenshot · `Ctrl+L` lock ·
+`Shift+B` browser · `Shift+F` files · `Shift+N` nvim · `Shift+C` VS Code · `Shift+A` ChatGPT · `Shift+Alt+A` Claude ·
+`Shift+D` lazydocker · `Alt+Tab` next window · keyboard: Turkish Q.
 
 **tmux** (prefix `C-a`): `|` `-` split · `C-h/j/k/l` move (shared with nvim) · `f` projects · `g` lazygit ·
 `s` sessions · `r` reload.

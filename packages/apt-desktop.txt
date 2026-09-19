@@ -15,6 +15,7 @@ mako-notifier
 swaybg
 grim
 slurp
+hyprpicker
 cliphist
 brightnessctl
 playerctl
