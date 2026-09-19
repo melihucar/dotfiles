@@ -136,9 +136,12 @@ step_link() {
 step_git() {
   local f="$HOME/.config/git/local" name email
   [[ -f $f ]] && { ok "git identity: $(git config -f "$f" user.email)"; return; }
+  # defaults: GitHub's private noreply address (a real email gets pushes rejected, GH007)
+  local def_name="Melih Uçar" def_email="982959+melihucar@users.noreply.github.com"
   name=${GIT_NAME:-}; email=${GIT_EMAIL:-}
-  [[ -z $name ]] && read -rp "git user.name: " name
-  [[ -z $email ]] && read -rp "git user.email: " email
+  [[ -z $name ]] && read -rp "git user.name [$def_name]: " name
+  [[ -z $email ]] && read -rp "git user.email [$def_email]: " email
+  name=${name:-$def_name}; email=${email:-$def_email}
   mkdir -p "$(dirname "$f")"
   git config -f "$f" user.name "$name"
   git config -f "$f" user.email "$email"
