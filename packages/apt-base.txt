@@ -19,4 +19,5 @@ openssh-client
 wl-clipboard
 xclip
 libnotify-bin
+alsa-utils
 # docker is handled in install.sh (keeps docker-ce if installed, else docker.io)

@@ -108,9 +108,9 @@ stow/<pkg>/                mirrors $HOME; `dot-foo` is linked as `~/.foo`
   python, uv, neovim, tree-sitter and the CLI tools (rg, fd, fzf, eza, bat, delta, lazygit, gh, starship,
   zoxide, yazi) — same versions on any Ubuntu.
 - **Neovim plugins** are pinned in `stow/nvim/.config/nvim/lazy-lock.json`; install uses `:Lazy restore`.
-- **Audio**: `stow/audio` makes the DELL S2722QC (Radeon HDMI 2) the default output. It names the card by
-  PCI slot (`0000_0b_00.1`) — if sound goes elsewhere after hardware changes, check `wpctl status` and
-  `pw-dump | jq -r '.[] | select(.info.props["media.class"]=="Audio/Sink") | .info.props["node.name"]'`.
+- **Audio**: at login Hyprland runs `audio-to-monitor S2722QC`, which finds the HDMI/DP audio port by the
+  monitor's *name* and makes it the default output (port numbers change between kernels). Run
+  `audio-to-monitor S2721QSA` to switch to the other screen; change the name in `hyprland.conf` to make it stick.
 
 ## Daily use
 
