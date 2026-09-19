@@ -1,0 +1,31 @@
+# Hyprland desktop (Ubuntu 26.04+ has these in the archive)
+hyprland
+hypridle
+hyprlock
+hyprpolkitagent
+xdg-desktop-portal-hyprland
+xdg-desktop-portal-gtk
+uwsm
+waybar
+fuzzel
+mako-notifier
+swaybg
+grim
+slurp
+cliphist
+brightnessctl
+playerctl
+pavucontrol
+network-manager-gnome
+blueman
+pipewire-pulse
+wireplumber
+qt6-wayland
+gnome-keyring
+nautilus
+fonts-noto-color-emoji
+# login manager that replaces GDM
+greetd
+tuigreet
+# terminal (falls back to snap if missing)
+ghostty

@@ -1,0 +1,22 @@
+# Core CLI + build deps. One package per line; missing ones are skipped with a warning.
+build-essential
+git
+curl
+wget
+unzip
+xz-utils
+ca-certificates
+gnupg
+stow
+zsh
+tmux
+jq
+htop
+btop
+tree
+fontconfig
+openssh-client
+wl-clipboard
+xclip
+libnotify-bin
+# docker is handled in install.sh (keeps docker-ce if installed, else docker.io)

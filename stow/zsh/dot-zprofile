@@ -1,0 +1,5 @@
+# Login shells: put mise shims on PATH so GUI apps / non-interactive
+# shells (VS Code, git hooks, cron) see the same node/python/nvim.
+if command -v mise >/dev/null 2>&1; then
+  eval "$(mise activate zsh --shims)"
+fi

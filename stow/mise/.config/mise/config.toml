@@ -1,0 +1,33 @@
+# Global tool versions. Projects override with their own mise.toml / .nvmrc / .python-version.
+# `mise up` upgrades everything; `mise ls` shows what's active.
+
+[tools]
+# runtimes
+node = "lts"
+pnpm = "latest"
+python = "3.14"
+uv = "latest"
+
+# editor
+neovim = "0.12"
+tree-sitter = "latest" # nvim-treesitter (main) needs the CLI to build parsers
+
+# cli
+gh = "latest"
+lazygit = "latest"
+delta = "latest"
+starship = "latest"
+fzf = "latest"
+zoxide = "latest"
+eza = "latest"
+bat = "latest"
+ripgrep = "latest"
+fd = "latest"
+yazi = "latest"
+usage = "latest" # shell completions for mise itself
+
+[settings]
+# read .nvmrc / .node-version / .python-version in existing projects
+idiomatic_version_file_enable_tools = ["node", "python"]
+# auto-activate .venv in projects that have a uv.lock
+python.uv_venv_auto = "source"

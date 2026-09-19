@@ -1,0 +1,7 @@
+# global gitignore
+.DS_Store
+*.swp
+*~
+.idea/
+*.local.md
+.claude/settings.local.json

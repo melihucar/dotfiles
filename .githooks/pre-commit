@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+# Refuse commits that add binaries or large files to the dotfiles repo.
+set -euo pipefail
+max_kb=512
+fail=0
+
+# binary files show up as "-<TAB>-<TAB>path" in numstat
+while IFS=$'\t' read -r added deleted path; do
+  if [[ $added == "-" && $deleted == "-" ]]; then
+    echo "pre-commit: binary file not allowed: $path" >&2; fail=1
+  fi
+done < <(git diff --cached --numstat --diff-filter=ACMR)
+
+while IFS= read -r path; do
+  size=$(git cat-file -s ":$path" 2>/dev/null || echo 0)
+  if (( size > max_kb * 1024 )); then
+    echo "pre-commit: $path is $((size / 1024)) KB (limit ${max_kb} KB)" >&2; fail=1
+  fi
+done < <(git diff --cached --name-only --diff-filter=ACMR)
+
+if (( fail )); then
+  echo "pre-commit: unstage with: git rm --cached <file>  (and add it to .gitignore)" >&2
+  exit 1
+fi

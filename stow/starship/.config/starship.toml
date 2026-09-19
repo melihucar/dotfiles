@@ -1,0 +1,64 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = true
+command_timeout = 500
+palette = "rose_pine"
+
+format = """
+$directory$git_branch$git_state$git_status$python$nodejs$docker_context$cmd_duration
+$character"""
+
+[directory]
+style = "bold iris"
+truncation_length = 3
+truncate_to_repo = true
+
+[git_branch]
+format = "[$symbol$branch]($style) "
+symbol = " "
+style = "foam"
+
+[git_status]
+format = "[$all_status$ahead_behind]($style) "
+style = "love"
+
+[git_state]
+style = "gold"
+
+[python]
+format = "[${symbol}${version}( \\($virtualenv\\))]($style) "
+symbol = " "
+style = "gold"
+
+[nodejs]
+format = "[$symbol$version]($style) "
+symbol = " "
+style = "pine"
+detect_files = ["package.json", ".nvmrc", ".node-version"]
+
+[docker_context]
+format = "[$symbol$context]($style) "
+style = "foam"
+
+[cmd_duration]
+min_time = 2000
+format = "[ $duration]($style) "
+style = "muted"
+
+[character]
+success_symbol = "[❯](iris)"
+error_symbol = "[❯](love)"
+vimcmd_symbol = "[❮](foam)"
+
+[palettes.rose_pine]
+base = "#191724"
+surface = "#1f1d2e"
+overlay = "#26233a"
+muted = "#6e6a86"
+subtle = "#908caa"
+text = "#e0def4"
+love = "#eb6f92"
+gold = "#f6c177"
+rose = "#ebbcba"
+pine = "#31748f"
+foam = "#9ccfd8"
+iris = "#c4a7e7"

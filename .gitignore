@@ -1,3 +1,12 @@
-lazy-lock.json
-.DS_STORE
+# machine-local / secrets (created at runtime inside stowed dirs)
+stow/bin/.local/bin/*
+!stow/bin/.local/bin/tmux-sessionizer
+stow/git/.config/git/local
+stow/hypr/.config/hypr/monitors.local.conf
+stow/hypr/.config/hypr/wallpaper.*
+stow/tmux/.config/tmux/plugins/
+stow/lazygit/.config/lazygit/state.yml
+stow/zsh/.config/zsh/completions/_*
 *.bak
+.DS_Store
+log.txt

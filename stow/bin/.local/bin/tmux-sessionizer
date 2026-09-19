@@ -1,0 +1,25 @@
+#!/usr/bin/env bash
+# Pick a project dir with fzf and jump to (or create) a tmux session for it.
+set -euo pipefail
+
+roots=("$HOME/Repositories" "$HOME/Projects" "$HOME/.dotfiles")
+
+if [[ $# -eq 1 ]]; then
+  dir=$1
+else
+  dir=$( { for r in "${roots[@]}"; do [[ -d $r ]] && fd . "$r" --type d --max-depth 2 --min-depth 1; done; } 2>/dev/null \
+        | sed "s|^$HOME|~|" | fzf --prompt="project > " | sed "s|^~|$HOME|") || exit 0
+fi
+[[ -z ${dir:-} ]] && exit 0
+
+name=$(basename "$dir" | tr '.:' '__')
+
+if ! tmux has-session -t="$name" 2>/dev/null; then
+  tmux new-session -ds "$name" -c "$dir"
+fi
+
+if [[ -n ${TMUX:-} ]]; then
+  tmux switch-client -t "$name"
+else
+  tmux attach -t "$name"
+fi

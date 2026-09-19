@@ -1,0 +1,28 @@
+# Ghostty — `ghostty +show-config --default --docs` for everything
+theme = rose-pine
+font-family = "FiraCode Nerd Font"
+font-size = 13
+font-feature = calt
+font-feature = liga
+
+window-padding-x = 10
+window-padding-y = 8
+window-padding-balance = true
+# ghostty doesn't allow trailing comments on a line.
+# `auto` keeps the titlebar on GNOME; switch to `none` once you're on Hyprland.
+window-decoration = auto
+background-opacity = 0.97
+unfocused-split-opacity = 0.85
+
+cursor-style = block
+cursor-style-blink = false
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+confirm-close-surface = false
+shell-integration = zsh
+shell-integration-features = no-cursor,sudo,title
+
+# uncomment to always land in tmux
+# command = /usr/bin/env zsh -lc "tmux new-session -A -s main"
+
+keybind = ctrl+shift+r=reload_config

@@ -1,0 +1,63 @@
+# Identity lives in ~/.config/git/local (untracked; install.sh creates it).
+[include]
+    path = ~/.config/git/local
+
+[init]
+    defaultBranch = main
+[core]
+    editor = nvim
+    pager = delta
+    autocrlf = input
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    line-numbers = true
+    syntax-theme = rose-pine
+[pull]
+    rebase = true
+[push]
+    autoSetupRemote = true
+    followTags = true
+[fetch]
+    prune = true
+[rebase]
+    autoStash = true
+    autoSquash = true
+    updateRefs = true
+[merge]
+    conflictStyle = zdiff3
+[diff]
+    algorithm = histogram
+    colorMoved = default
+[rerere]
+    enabled = true
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[column]
+    ui = auto
+[help]
+    autocorrect = prompt
+# clone/pull over https (works on a fresh machine), push over ssh (your key)
+[url "git@github.com:"]
+    pushInsteadOf = https://github.com/
+[credential "https://github.com"]
+    helper =
+    helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+    helper =
+    helper = !gh auth git-credential
+
+[alias]
+    st = status -sb
+    co = checkout
+    sw = switch
+    br = branch
+    cm = commit -m
+    amend = commit --amend --no-edit
+    unstage = restore --staged
+    undo = reset --soft HEAD~1
+    lg = log --oneline --graph --decorate
+    wip = !git add -A && git commit -m 'wip' --no-verify
