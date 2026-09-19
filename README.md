@@ -124,10 +124,13 @@ stow/<pkg>/                mirrors $HOME; `dot-foo` is linked as `~/.foo`
 
 ## Keys
 
-**Hyprland** (Super =  ): `Return` terminal · `Space` launcher · `Q` close · `H/J/K/L` focus ·
-`Shift+HJKL` move · `Ctrl+HJKL` resize · `1-0` workspaces · `S` scratchpad · `F` maximize · `T` float ·
-`C` clipboard history · `Shift+S` region screenshot · `Esc` lock · **`Shift+E` log out** ·
-keyboard: Turkish Q · Caps = Esc.
+**Hyprland** (Super =  , same keys as the old sway config):
+`Return` terminal · `D` / `Space` launcher · `Q` close · `H/J/K/L` or arrows focus · `Shift+HJKL` move ·
+`Ctrl+HJKL` resize (`R` = resize mode) · `1-0` workspaces (1 = right screen, 0 = left) · `F` fullscreen ·
+`Shift+F` maximize · `Shift+Space` float · `B`/`V` next window right/below · `S`/`W` tabs (group), `Alt+Tab` next tab ·
+`E` toggle split · `-` scratchpad (`Shift+-` send there) · `Shift+C` reload · `Shift+E` log out (asks) ·
+`Shift+Esc` or `Shift+Calculator` power menu · `Esc` lock · `Shift+B` browser · `N` files · `C` clipboard history ·
+`Shift+S` region screenshot · keyboard: Turkish Q.
 
 **tmux** (prefix `C-a`): `|` `-` split · `C-h/j/k/l` move (shared with nvim) · `f` projects · `g` lazygit ·
 `s` sessions · `r` reload.

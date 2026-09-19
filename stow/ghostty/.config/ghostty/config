@@ -26,3 +26,7 @@ shell-integration-features = no-cursor,sudo,title
 # command = /usr/bin/env zsh -lc "tmux new-session -A -s main"
 
 keybind = ctrl+shift+r=reload_config
+
+# Ghostty's default ctrl+enter = toggle fullscreen steals the key from terminal apps
+# (Claude Code, nvim). Fullscreen is Super+F in Hyprland instead.
+keybind = ctrl+enter=unbind

@@ -15,7 +15,7 @@
   "hyprland/window": { "max-length": 60, "separate-outputs": true },
   "hyprland/language": { "format": "{short}" },
   "clock": {
-    "format": "{:%a %d %b  %H:%M}",
+    "format": "{:%A, %Y-%m-%d %H:%M}",
     "tooltip-format": "<tt>{calendar}</tt>"
   },
   "cpu": { "format": " {usage}%", "interval": 5 },

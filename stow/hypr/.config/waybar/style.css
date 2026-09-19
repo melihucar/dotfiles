@@ -23,7 +23,7 @@
 window#waybar { background: alpha(@base, 0.92); color: @text; }
 
 #workspaces button { padding: 0 8px; color: @muted; background: transparent; }
-#workspaces button.active { color: @base; background: @iris; border-radius: 6px; }
+#workspaces button.active { color: @base; background: @gold; border-radius: 6px; }
 #workspaces button.urgent { color: @love; }
 #workspaces button:hover { background: @overlay; box-shadow: none; }
 
