@@ -127,7 +127,7 @@ stow/<pkg>/                mirrors $HOME; `dot-foo` is linked as `~/.foo`
 **Hyprland** (Super =  ): `Return` terminal · `Space` launcher · `Q` close · `H/J/K/L` focus ·
 `Shift+HJKL` move · `Ctrl+HJKL` resize · `1-0` workspaces · `S` scratchpad · `F` maximize · `T` float ·
 `C` clipboard history · `Shift+S` region screenshot · `Esc` lock · **`Shift+E` log out** ·
-`Alt+Shift` us/tr layout · Caps = Esc.
+keyboard: Turkish Q · Caps = Esc.
 
 **tmux** (prefix `C-a`): `|` `-` split · `C-h/j/k/l` move (shared with nvim) · `f` projects · `g` lazygit ·
 `s` sessions · `r` reload.

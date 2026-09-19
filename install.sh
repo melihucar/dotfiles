@@ -103,6 +103,11 @@ step_desktop() {
         warn "Hyprland isn't in this Ubuntu's archive (needs 26.04+). Upgrade Ubuntu or use a PPA/build script." ;;
     esac
   done
+  # system keyboard (login screen + text consoles): Turkish Q, same as Hyprland
+  if ! grep -q '^XKBLAYOUT="tr"' /etc/default/keyboard 2>/dev/null; then
+    info "keyboard: Turkish Q for login screen and consoles"
+    sudo localectl set-x11-keymap tr && sudo setupcon 2>/dev/null || true
+  fi
   # hyprpolkitagent ships a user unit
   systemctl --user enable hyprpolkitagent.service >/dev/null 2>&1 || true
 }
