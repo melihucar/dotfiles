@@ -124,10 +124,10 @@ stow/<pkg>/                mirrors $HOME; `dot-foo` is linked as `~/.foo`
 
 ## Keys
 
-**Hyprland** — Omarchy's key scheme (Super =  ). **`Super+K` shows every binding, searchable.**
+**Hyprland** — Omarchy's key scheme (Super =  ). **`Super+F1` shows every binding, searchable.**
 Most used: `Return` terminal · `Space` launcher · `W`/`Q` close · `Escape` system menu (lock, sleep, reboot, shutdown, log out) ·
-arrows focus, `Shift+arrows` swap · `1-0` workspaces (1-5 right screen, 6-10 left), `Shift+num` move window ·
-`F` fullscreen, `Alt+F` maximize · `T` float · `J` split direction · `G` group (tabs) · `S` scratchpad ·
+arrows or `H/J/K/L` focus, `Shift+`arrows/HJKL swap, `R` resize mode · `1-0` workspaces (1-5 right screen, 6-10 left), `Shift+num` move window ·
+`F` fullscreen, `Alt+F` maximize · `T` float · `E` split direction · `G` group (tabs) · `S` scratchpad ·
 `C`/`V`/`X` copy/paste/cut in any app · `Ctrl+V` clipboard history · `Print` screenshot · `Ctrl+L` lock ·
 `Shift+B` browser · `Shift+F` files · `Shift+N` nvim · `Shift+C` VS Code · `Shift+A` ChatGPT · `Shift+Alt+A` Claude ·
 `Shift+D` lazydocker · `Alt+Tab` next window · keyboard: Turkish Q.
