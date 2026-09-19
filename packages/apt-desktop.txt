@@ -1,5 +1,8 @@
 # Hyprland desktop (Ubuntu 26.04+ has these in the archive)
 hyprland
+# Hyprland's dialogs/popups; 0.53+ warns at startup without it (older name: hyprland-qtutils)
+hyprland-guiutils
+hyprland-qtutils
 hypridle
 hyprlock
 hyprpolkitagent
