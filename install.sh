@@ -40,6 +40,36 @@ apt_install_list() {
 }
 
 # ---------------------------------------------------------------------------
+# After `do-release-upgrade`, third-party sources are left disabled. Re-enable the vendor
+# repos this setup uses (never random PPAs) and point Docker at the new release.
+reenable_vendor_sources() {
+  local d=/etc/apt/sources.list.d f changed=0
+  local vendors='docker|google-chrome|vscode|claude-desktop|chatgpt|openai'
+  for f in "$d"/*.list "$d"/*.sources; do
+    [[ -e $f ]] || continue
+    [[ $(basename "$f") =~ ^($vendors) ]] || continue
+    if grep -q 'disabled on upgrade' "$f"; then
+      sudo sed -i -E 's/^# ?(deb .*) # disabled on upgrade to .*/\1/' "$f"; changed=1
+    fi
+    if grep -q '^Enabled: no' "$f"; then
+      sudo sed -i '/^Enabled: no/d' "$f"; changed=1
+    fi
+  done
+  # Docker's repo is per-release: use this release's codename if Docker publishes it
+  if [[ -f $d/docker.list ]]; then
+    local codename
+    # shellcheck disable=SC1091
+    codename=$(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+    if ! grep -q " $codename stable" "$d/docker.list" &&
+       curl -fsI "https://download.docker.com/linux/ubuntu/dists/$codename/Release" >/dev/null 2>&1; then
+      sudo sed -i -E "s#(download.docker.com/linux/ubuntu) [a-z]+ stable#\1 $codename stable#" "$d/docker.list"
+      changed=1
+    fi
+  fi
+  if ((changed)); then warn "re-enabled vendor apt sources after a release upgrade"; fi
+  return 0
+}
+
 apt_fix_broken() {
   if ! sudo apt-get check >/dev/null 2>&1; then
     warn "apt has unmet dependencies from before — running 'apt-get -f install' to repair"
@@ -49,6 +79,7 @@ apt_fix_broken() {
 
 step_apt() {
   info "apt: base packages"
+  reenable_vendor_sources
   sudo apt-get update -qq
   apt_fix_broken
   apt_install_list "$DOTFILES/packages/apt-base.txt"

@@ -152,5 +152,6 @@ stow/<pkg>/                mirrors $HOME; `dot-foo` is linked as `~/.foo`
 | git uses the wrong name/email | an old `~/.gitconfig` overrides `~/.config/git/config`; install.sh moves it to `~/.dotfiles-backup/` |
 | No sound | `wpctl status` — check which sink has the `*`; `wpctl set-default <id>` |
 | `do-release-upgrade`: no new release | fully update + reboot first; LTS→LTS opens a few weeks after the `.1` point release (`-d` forces it) |
+| After a release upgrade | just run `./install.sh` — it re-enables the Docker/Chrome/VS Code/Claude/ChatGPT sources the upgrade disabled and moves Docker to the new release |
 
 Backups of anything install.sh replaced live in `~/.dotfiles-backup/<timestamp>/`.
